@@ -72,7 +72,12 @@ app.get("/movies/:title", async (req, res) => {
 
 app.delete("/movies/:title", async (req, res) => {
   await Movie.deleteOne({ title: req.params.title });
+  const moviesList = await Movie.find();
+  res.send(moviesList);
+});
 
+app.delete("/movies", async (req, res) => {
+  await Movie.deleteMany();
   const moviesList = await Movie.find();
   res.send(moviesList);
 });
